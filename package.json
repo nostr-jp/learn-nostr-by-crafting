@@ -6,6 +6,9 @@
   "author": "jiftechnify",
   "license": "MIT",
   "private": true,
+  "scripts": {
+    "to-hex": "node scripts/to_hex.js"
+  },
   "dependencies": {
     "nostr-tools": "^1.10.1",
     "websocket-polyfill": "^0.0.3"
