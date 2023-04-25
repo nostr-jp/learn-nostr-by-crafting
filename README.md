@@ -1,2 +1,2 @@
-# learn-nostr-by-crafting
-Learn the Nostr protocol by crafting your own bots!
+# 手を動かして学ぶ Nostrプロトコル
+
