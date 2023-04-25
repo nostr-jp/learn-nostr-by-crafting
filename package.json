@@ -1,0 +1,13 @@
+{
+  "name": "learn-nostr-by-crafting",
+  "version": "0.1.0",
+  "main": "index.js",
+  "repository": "ssh://git@github.com/jiftechnify/learn-nostr-by-crafting.git",
+  "author": "jiftechnify",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "nostr-tools": "^1.10.1",
+    "websocket-polyfill": "^0.0.3"
+  }
+}
