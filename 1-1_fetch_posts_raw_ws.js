@@ -8,7 +8,7 @@ const main = () => {
 
   ws.onopen = () => {
     const req = [
-      /* Q: REQメッセージを書いてみよう */
+      /* Q-1: REQメッセージを書いてみよう */
     ];
     ws.send(JSON.stringify(req));
   };
@@ -17,9 +17,9 @@ const main = () => {
     const msg = JSON.parse(e.data);
 
     // メッセージタイプによって分岐
-    switch (/* Q: 受信したメッセージからメッセージタイプを取り出そう */) {
+    switch (/* Q-2: 受信したメッセージからメッセージタイプを取り出そう */) {
       case "EVENT":
-        console.log(/* Q: 受信したEVENTメッセージからイベント本体を取り出して表示してみよう */);
+        console.log(/* Q-3: 受信したEVENTメッセージからイベント本体を取り出して表示してみよう */);
         break;
 
       case "EOSE":

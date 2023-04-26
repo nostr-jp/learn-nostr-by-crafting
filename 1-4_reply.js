@@ -8,7 +8,7 @@ const {
 } = require("nostr-tools");
 require("websocket-polyfill");
 
-const PRIVATE_KEY_HEX = /* 自分の秘密鍵(hex形式) */
+const PRIVATE_KEY_HEX = "<自分の秘密鍵(hex形式)>"
 
 const relayUrl = "wss://relay-jp.nostr.wirednet.jp";
 
@@ -21,16 +21,16 @@ const relayUrl = "wss://relay-jp.nostr.wirednet.jp";
 const composeReplyPost = (content, targetPubkey, targetEventId) => {
   const myPubkey = getPublicKey(PRIVATE_KEY_HEX);
 
-  const targetNpub = /* Q: リプライ対象の公開鍵をbech32形式(npub1...)に変換しよう  */
-  const contentWithRef = `${/* Q: リプライ対象への参照を投稿内容に埋め込もう */} ${content}`;
+  const targetNpub = /* Q-3: リプライ対象の公開鍵をbech32形式(npub1...)に変換しよう  */
+  const contentWithRef = `${/* Q-4: リプライ対象への参照を投稿内容に埋め込もう */} ${content}`;
 
   const ev = {
     pubkey: myPubkey,
     kind: 1,
     content: contentWithRef,
     tags: [
-      [/* Q: リプライ対象の公開鍵を指すpタグを書いてみよう */],
-      [/* Q: リプライ対象の投稿を指すeタグを書いてみよう */],
+      [/* Q-1: リプライ対象の公開鍵を指すpタグを書いてみよう */],
+      [/* Q-2: リプライ対象の投稿を指すeタグを書いてみよう */],
     ],
     created_at: currUnixtime(),
   };

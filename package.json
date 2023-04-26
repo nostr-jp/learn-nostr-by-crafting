@@ -7,7 +7,8 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "to-hex": "node scripts/to_hex.js"
+    "to-hex": "node scripts/to_hex.js",
+    "gen-key-pair": "node scripts/gen_key_pair.js"
   },
   "dependencies": {
     "nostr-tools": "^1.10.1",

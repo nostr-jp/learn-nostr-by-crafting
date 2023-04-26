@@ -2,7 +2,7 @@ const { currUnixtime, getCliArg } = require("./utils.js");
 const { relayInit, getPublicKey, getEventHash, signEvent } = require("nostr-tools");
 require("websocket-polyfill");
 
-const PRIVATE_KEY_HEX = /* Q: 秘密鍵をhex形式に変換してここに設定しよう */
+const PRIVATE_KEY_HEX = /* Q-1: 自分の秘密鍵をhex形式に変換してここに設定しよう */
 
 const relayUrl = "wss://relay-jp.nostr.wirednet.jp";
 
@@ -11,16 +11,19 @@ const relayUrl = "wss://relay-jp.nostr.wirednet.jp";
  * @param {string} content 
  */
 const composePost = (content) => {
-  const pubkey = getPublicKey(PRIVATE_KEY_HEX); // 公開鍵は秘密鍵から導出される
+  const pubkey = getPublicKey(PRIVATE_KEY_HEX); // 公開鍵は秘密鍵から導出できる
   const ev = {
-    /* Q: イベントの pubkey, kind, content を設定してみよう */
+    /* Q-2: イベントの pubkey, kind, content を設定してみよう */
+    pubkey: ???,
+    kind: ???,
+    content: ???,
     tags: [],
     created_at: currUnixtime(),
   }
-  const id = /* Q: イベントのハッシュ値を求めてみよう */
-  const sig = /* Q: イベントの署名を生成してみよう */
+  const id = /* Q-3: イベントのハッシュ値を求めてみよう */
+  const sig = /* Q-4: イベントの署名を生成してみよう */
 
-  return {...ev, id, sig}
+  return {...ev, id, sig} // イベントにID(ハッシュ値)と署名を設定
 }
 
 const main = async (content) => {
@@ -33,7 +36,7 @@ const main = async (content) => {
 
   const post = composePost(content);
 
-  const pub = /* Q: Relayのメソッドを使ってイベントを発行してみよう */
+  const pub = /* Q-5: Relayのメソッドを使ってイベントを発行してみよう */
 
   pub.on('ok', () => {
     console.log("succeess!");

@@ -5,15 +5,15 @@ require("websocket-polyfill");
 const relayUrl = "wss://relay-jp.nostr.wirednet.jp";
 
 const main = async () => {
-  const relay = /* Q: Relayを初期化してみよう */
+  const relay = /* Q-1: Relayを初期化してみよう */
 
   relay.on("error", () => {
     console.error("failed to connect");
   });
 
-  /* Q: Relayのメソッドを呼び出してリレーに接続してみよう */
+  /* Q-2: Relayのメソッドを呼び出してリレーに接続してみよう */
 
-  const sub = /* Q: Relayのメソッドを使ってイベントを購読してみよう */
+  const sub = /* Q-3: Relayのメソッドを使ってイベントを購読してみよう */
 
   // メッセージタイプごとにリスナーを設定できる
   sub.on("event", (ev) => {
