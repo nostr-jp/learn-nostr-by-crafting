@@ -17,24 +17,19 @@ const relayUrl = "wss://relay-jp.nostr.wirednet.jp";
  * @param {import("nostr-tools").Event} targetEvent リアクション対象のイベント
  */
 const composeReaction = (targetEvent) => {
+  /* Q-1: リアクションイベントのフィールドを埋めよう  */
   const ev = {
-    pubkey: BOT_PUBLIC_KEY_HEX,
-    /* Q-1: リアクションイベントの kind, content, tags を設定しよう  */
-    kind: ???,
-    content: ???,
-    tags: [
-      [???],
-      [???],
-    ],
-    created_at: currUnixtime(),
+
   };
+
+  // 署名
   const id = getEventHash(ev);
   const sig = signEvent(ev, BOT_PRIVATE_KEY_HEX);
 
   return { ...ev, id, sig };
 };
 
-// リレーにイベントを送信する
+// リレーにイベントを送信
 const publishToRelay = (relay, ev) => {
   const pub = relay.publish(ev);
   pub.on("ok", () => {
@@ -54,16 +49,13 @@ const main = async (targetWord) => {
   await relay.connect();
   console.log("connected to relay");
 
-  // すべてのテキスト投稿を購読
-  const sub = relay.sub([
-    { kinds: [1], since: currUnixtime() },
-  ]);
+  const sub = /* Q-2: すべてのテキスト投稿を購読しよう */
   sub.on("event", (ev) => {
-    /* Q-2: 「受信した投稿のcontentにtargetWordが含まれていたら、
-          その投稿イベントにリアクションする」ロジックを完成させよう */
+    /* Q-3: 「受信した投稿のcontentに対象の単語が含まれていたら、
+            その投稿イベントにリアクションする」ロジックを完成させよう */
   });
 };
 
-// コマンドライン引数をリアクション対象ワードとする
+// コマンドライン引数をリアクション対象の単語とする
 const targetWord = getCliArg("specify target word to react!");
 main(targetWord).catch((e) => console.error(e));

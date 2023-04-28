@@ -13,11 +13,6 @@ const BOT_PUBLIC_KEY_HEX = getPublicKey(BOT_PRIVATE_KEY_HEX);
 
 const relayUrl = "wss://relay-jp.nostr.wirednet.jp";
 
-/**
- * 受信したリプライイベントのタグリストから、リプライツリーのルートのイベントIDを抽出
- * @param {string[][]} tags
- */
-const extractRootEventId = (tags) => /* Q-ex1: この関数の実装を完成させよう */
 
 /**
  * テキスト投稿イベント(リプライ)を組み立てる
@@ -25,37 +20,8 @@ const extractRootEventId = (tags) => /* Q-ex1: この関数の実装を完成さ
  * @param {import("nostr-tools").Event} targetEvent リプライ対象のイベント
  */
 const composeReplyPost = (content, targetEvent) => {
-  const {
-    id: targetEventId,
-    pubkey: targetPubkey,
-    tags: targetEvTags,
-  } = targetEvent;
-
-  const targetNpub = nip19.npubEncode(targetPubkey);
-  const contentWithRef = `nostr:${targetNpub} ${content}`;
-
-  const tags = [
-    ["p", targetPubkey, ""],
-    [/* Q-2: リプライ対象の投稿を指すeタグを書こう */],
-  ],
-  
-  /* Q-ex2: リプライツリーのルートを指すeタグを追加しよう */
-  // const rootEventId = extractRootEventId(targetEvTags);
-  // if (rootEventId) {
-  //   tags.push([/* リプライツリーのルートを指すeタグ */])
-  // }
-
-  const ev = {
-    pubkey: BOT_PUBLIC_KEY_HEX,
-    kind: 1,
-    content: contentWithRef,
-    tags,
-    created_at: currUnixtime(),
-  };
-  const id = getEventHash(ev);
-  const sig = signEvent(ev, BOT_PRIVATE_KEY_HEX);
-
-  return { ...ev, id, sig };
+  /* Q-1: これまで学んだことを思い出しながら、
+          リプライを表現するイベントを組み立てよう */
 };
 
 // リレーにイベントを送信
@@ -68,7 +34,6 @@ const publishToRelay = (relay, ev) => {
     console.log("failed to send event");
   });
 };
-
 
 /* 無限リプライループ対策 */
 // リプライクールタイム
@@ -98,10 +63,7 @@ const main = async () => {
   await relay.connect();
   console.log("connected to relay");
 
-  const sub = relay.sub([
-    { kinds: [1], /* Q-1: 「このBotへのリプライ」を絞り込むフィルタを設定しよう */ , since: currUnixtime() },
-  ]);
-
+  const sub = /* Q-2: 「このBotへのリプライ」を絞り込むフィルタを設定して購読しよう */
   sub.on("event", (ev) => {
     if (isSafeToReply(ev.pubkey)) {
       const replyPost = composeReplyPost("こんにちは！", ev);

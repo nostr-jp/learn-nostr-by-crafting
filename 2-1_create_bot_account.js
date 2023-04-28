@@ -26,13 +26,12 @@ const composeMetadata = () => {
     about: "", // 説明欄(bio)
   };
 
+  /* Q-2: メタデータ(プロフィール)イベントのフィールドを埋めよう */
   const ev = {
-    pubkey: BOT_PUBLIC_KEY_HEX,
-    kind: /* Q-2: メタデータ(プロフィール)のkindを指定しよう */ ,
-    content: JSON.stringify(profile),
-    tags: [],
-    created_at: currUnixtime(),
+
   };
+
+  // 署名
   const id = getEventHash(ev);
   const sig = signEvent(ev, BOT_PRIVATE_KEY_HEX);
 
