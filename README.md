@@ -5,7 +5,7 @@
 以下のコマンドで演習環境をセットアップします。実行前に、Node.jsをインストールしておいてください。
 
 ```bash
-git clone https://github.com/jiftechnify/learn-nostr-by-crafting.git
+git clone https://github.com/nostr-jp/learn-nostr-by-crafting.git
 cd learn-nostr-by-crafting
 npm install
 ```
@@ -21,3 +21,10 @@ npm install
 
 - `gen-key-pair`: 秘密鍵と公開鍵のペアを生成
 - `to-hex`: `npub...` `nsec...` のようなフォーマット(Bech32形式といいます)のデータを16進文字列形式に変換
+
+
+---
+
+## TODOs
+
+- クライアントで特定の投稿のIDを取得してHex形式に変換する方法を説明する → 演習のコード内にコメントでヒントを書くかREADMEに書くほうがいいかも
