@@ -2,7 +2,8 @@ const { currUnixtime, getCliArg } = require("./utils.js");
 const { relayInit, getPublicKey, getEventHash, signEvent } = require("nostr-tools");
 require("websocket-polyfill");
 
-const PRIVATE_KEY_HEX = /* Q-1: 自分の秘密鍵をhex形式に変換してここに設定しよう */
+/* Q-1: 自分の秘密鍵をhex形式に変換して、ここに設定しよう */
+const PRIVATE_KEY_HEX = ???;
 
 const relayUrl = "wss://relay-jp.nostr.wirednet.jp";
 
@@ -20,10 +21,17 @@ const composePost = (content) => {
     tags: [],
     created_at: currUnixtime(),
   }
-  const id = /* Q-3: イベントのハッシュ値を求めてみよう */
-  const sig = /* Q-4: イベントの署名を生成してみよう */
+  /* Q-3: イベントのハッシュ値を求めてみよう */
+  const id = ???
+  /* Q-4: イベントの署名を生成してみよう */
+  const sig = ???
 
   return {...ev, id, sig} // イベントにID(ハッシュ値)と署名を設定
+
+  /* 
+   * Q(おまけ): nostr-toolsには、イベントのハッシュ値の計算と署名の生成を行って、イベントのオブジェクトに自動で設定してくれる
+   *           (24~29行目の処理を一気にやってくれる)、便利な関数が用意されている。その関数を探してみよう
+   */
 }
 
 const main = async (content) => {
@@ -34,9 +42,12 @@ const main = async (content) => {
 
   await relay.connect();
 
+  // テキスト投稿イベントを組み立てて、中身を見てみる
   const post = composePost(content);
+  console.log(post);
 
-  const pub = /* Q-5: Relayのメソッドを使ってイベントを発行してみよう */
+  /* Q-5: Relayオブジェクトのメソッドを使って、イベントを発行してみよう */
+  const pub = ???;
 
   pub.on('ok', () => {
     console.log("succeess!");
@@ -48,5 +59,5 @@ const main = async (content) => {
   })
 };
 
-const content = getCliArg();
+const content = getCliArg("error: 投稿内容をコマンドライン引数として設定してください");
 main(content).catch((e) => console.error(e));

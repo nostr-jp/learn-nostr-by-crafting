@@ -1,7 +1,8 @@
 const { currUnixtime } = require("./utils.js");
 require("websocket-polyfill");
 
-const relayUrl = "wss://relay-jp.nostr.wirednet.jp"; /* Q(おまけ): URLを変更して、別のリレーの様子も見てみよう */
+/* Q(おまけ): URLを変更して、別のリレーの様子も見てみよう */
+const relayUrl = "wss://relay-jp.nostr.wirednet.jp"; 
 
 const main = () => {
   const ws = new WebSocket(relayUrl);
@@ -9,6 +10,7 @@ const main = () => {
   ws.onopen = () => {
     const req = [
       /* Q-1: REQメッセージを書いてみよう */
+      ???
     ];
     ws.send(JSON.stringify(req));
   };
@@ -17,9 +19,11 @@ const main = () => {
     const msg = JSON.parse(e.data);
 
     // メッセージタイプによって分岐
-    switch (/* Q-2: 受信したメッセージからメッセージタイプを取り出そう */) {
+    /* Q-2: 受信したメッセージからメッセージタイプを取り出そう */
+    switch ( ??? ) {
       case "EVENT":
-        console.log(/* Q-3: 受信したEVENTメッセージからイベント本体を取り出して表示してみよう */);
+        /* Q-3: 受信したEVENTメッセージからイベント本体を取り出して表示してみよう */
+        console.log( ??? );
         break;
 
       case "EOSE":

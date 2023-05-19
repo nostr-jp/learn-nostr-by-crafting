@@ -1,14 +1,15 @@
-const { nip19 } = require("nostr-tools");
 const { currUnixtime, getCliArg } = require("./utils.js");
 const {
   relayInit,
   getPublicKey,
   getEventHash,
   signEvent,
+  nip19
 } = require("nostr-tools");
 require("websocket-polyfill");
 
-const PRIVATE_KEY_HEX = "<自分の秘密鍵(hex形式)>"
+/* 自分の秘密鍵をhex形式に変換して、ここに設定*/
+const PRIVATE_KEY_HEX = ???;
 
 const relayUrl = "wss://relay-jp.nostr.wirednet.jp";
 
@@ -21,16 +22,17 @@ const relayUrl = "wss://relay-jp.nostr.wirednet.jp";
 const composeReplyPost = (content, targetPubkey, targetEventId) => {
   const myPubkey = getPublicKey(PRIVATE_KEY_HEX);
 
-  const targetNpub = /* Q-3: リプライ対象の公開鍵をbech32形式(npub1...)に変換しよう  */
-  const contentWithRef = `${/* Q-4: リプライ対象への参照を投稿内容に埋め込もう */} ${content}`;
+  // 発展課題のヒント: NIP-27に準拠するには、ここでcontentに手を加えることになります
 
   const ev = {
     pubkey: myPubkey,
     kind: 1,
-    content: contentWithRef,
+    content,
     tags: [
-      [/* Q-1: リプライ対象の公開鍵を指すpタグを書いてみよう */],
-      [/* Q-2: リプライ対象の投稿を指すeタグを書いてみよう */],
+      /* Q-1: リプライ対象の公開鍵を指すpタグを書いてみよう */
+      [???],
+      /* Q-2: リプライ対象の投稿を指すeタグを書いてみよう */
+      [???],
     ],
     created_at: currUnixtime(),
   };
@@ -50,8 +52,11 @@ const main = async (content) => {
 
   const replyPost = composeReplyPost(
     content,
-    "<リプライ対象の公開鍵>",
-    "<リプライ対象の投稿のイベントID>"
+    /* Q-3: Nostr上の好きな投稿を選び、その投稿のイベントIDと投稿者の公開鍵を調べて、ここに設定してみよう */
+    // ヒント-1: まずは、1-3節の演習で作った投稿にリプライしてみるといいでしょう。必要な2つのデータはログに出力されたイベントの中にあります
+    // ヒント-2: 「リプライ実装チェッカー(bot)」の投稿にリプライすると、実装が正しいか判定して結果を教えてくれます。詳しくはREADME.mdを参照してください
+    "???(リプライ対象の公開鍵)",
+    "???(リプライ対象の投稿のイベントID)"
   );
   const pub = relay.publish(replyPost);
 
@@ -65,5 +70,5 @@ const main = async (content) => {
   });
 };
 
-const content = getCliArg("specify content as argument!");
+const content = getCliArg("error: リプライの内容をコマンドライン引数として設定してください");
 main(content).catch((e) => console.error(e));

@@ -2,17 +2,15 @@ const { currUnixtime } = require("./utils.js");
 const {
   relayInit,
   getPublicKey,
-  getEventHash,
-  signEvent,
+  finishEvent,
   nip19
 } = require("nostr-tools");
 require("websocket-polyfill");
 
-const BOT_PRIVATE_KEY_HEX = "2-1で生成したBot用秘密鍵(hex)";
-const BOT_PUBLIC_KEY_HEX = getPublicKey(BOT_PRIVATE_KEY_HEX);
+/* Bot用の秘密鍵をここに設定 */
+const BOT_PRIVATE_KEY_HEX = ???;
 
 const relayUrl = "wss://relay-jp.nostr.wirednet.jp";
-
 
 /**
  * テキスト投稿イベント(リプライ)を組み立てる
@@ -22,6 +20,7 @@ const relayUrl = "wss://relay-jp.nostr.wirednet.jp";
 const composeReplyPost = (content, targetEvent) => {
   /* Q-1: これまで学んだことを思い出しながら、
           リプライを表現するイベントを組み立てよう */
+  ???;
 };
 
 // リレーにイベントを送信
@@ -54,6 +53,7 @@ const isSafeToReply = (pubkey) => {
   return true
 }
 
+// メイン関数
 const main = async () => {
   const relay = relayInit(relayUrl);
   relay.on("error", () => {
@@ -63,8 +63,12 @@ const main = async () => {
   await relay.connect();
   console.log("connected to relay");
 
-  const sub = /* Q-2: 「このBotへのリプライ」を絞り込むフィルタを設定して購読しよう */
+  /* Q-2: 「このBotの公開鍵へのリプライ」を絞り込むフィルタを設定して、イベントを購読しよう */
+  // ヒント: nostr-toolsのgetPublicKey()関数を使って、秘密鍵(BOT_PRIVATE_KEY_HEX)から公開鍵を得ることができます
+  const sub = ???;
+
   sub.on("event", (ev) => {
+    // リプライしても安全なら、リプライイベントを組み立てて送信する
     if (isSafeToReply(ev.pubkey)) {
       const replyPost = composeReplyPost("こんにちは！", ev);
       publishToRelay(relay, replyPost);

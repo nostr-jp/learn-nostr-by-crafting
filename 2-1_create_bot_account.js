@@ -2,14 +2,13 @@ const { currUnixtime } = require("./utils.js");
 const {
   relayInit,
   getPublicKey,
-  getEventHash,
-  signEvent,
-  generatePrivateKey,
+  finishEvent,
   nip19,
 } = require("nostr-tools");
 require("websocket-polyfill");
 
-const BOT_PRIVATE_KEY_HEX = "<Bot用に生成した秘密鍵(hex形式)>";
+/* Q-1: Bot用に新しい秘密鍵を生成して、ここに設定しよう */
+const BOT_PRIVATE_KEY_HEX = ???;
 const BOT_PUBLIC_KEY_HEX = getPublicKey(BOT_PRIVATE_KEY_HEX);
 
 const relayUrl = "wss://relay-jp.nostr.wirednet.jp";
@@ -19,24 +18,25 @@ const relayUrl = "wss://relay-jp.nostr.wirednet.jp";
  * @param {string} content
  */
 const composeMetadata = () => {
-  /* Q-1: Botアカウントのプロフィールを設定しよう  */
+  /* Q-2: Botアカウントのプロフィールを設定しよう  */
   const profile = {
     name: "", // スクリーンネーム
     display_name: "", // 表示名
     about: "", // 説明欄(bio)
   };
 
-  /* Q-2: メタデータ(プロフィール)イベントのフィールドを埋めよう */
+  /* Q-3: メタデータ(プロフィール)イベントのフィールドを埋めよう */
+  // pubkeyは以下の処理で自動で設定されるため、ここで設定する必要はありません
   const ev = {
-
+    kind: ???,
+    content: ???,
+    tags: [],
+    created_at: currUnixtime(),
   };
 
-  // 署名
-  const id = getEventHash(ev);
-  const sig = signEvent(ev, BOT_PRIVATE_KEY_HEX);
-
-  return { ...ev, id, sig };
-};
+  // イベントID(ハッシュ値)計算・署名
+  return finishEvent(ev, BOT_PRIVATE_KEY_HEX);
+}
 
 const main = async () => {
   const relay = relayInit(relayUrl);
@@ -46,10 +46,11 @@ const main = async () => {
 
   await relay.connect();
 
-
+  // メタデータ(プロフィール)イベントを組み立てる
   const metadata = composeMetadata();
-  const pub = relay.publish(metadata);
 
+  // メタデータイベントを送信
+  const pub = relay.publish(metadata);
   pub.on("ok", () => {
     console.log("succeess!");
     relay.close();

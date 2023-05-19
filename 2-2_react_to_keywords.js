@@ -2,13 +2,12 @@ const { currUnixtime, getCliArg } = require("./utils.js");
 const {
   relayInit,
   getPublicKey,
-  getEventHash,
-  signEvent,
+  finishEvent
 } = require("nostr-tools");
 require("websocket-polyfill");
 
-const BOT_PRIVATE_KEY_HEX = "2-1で生成したBot用秘密鍵(hex)";
-const BOT_PUBLIC_KEY_HEX = getPublicKey(BOT_PRIVATE_KEY_HEX);
+/* Bot用の秘密鍵をここに設定 */
+const BOT_PRIVATE_KEY_HEX = ???;
 
 const relayUrl = "wss://relay-jp.nostr.wirednet.jp";
 
@@ -19,14 +18,14 @@ const relayUrl = "wss://relay-jp.nostr.wirednet.jp";
 const composeReaction = (targetEvent) => {
   /* Q-1: リアクションイベントのフィールドを埋めよう  */
   const ev = {
-
+    kind: ???,
+    content: ???,
+    tags: ???,
+    created_at: currUnixtime(),
   };
 
-  // 署名
-  const id = getEventHash(ev);
-  const sig = signEvent(ev, BOT_PRIVATE_KEY_HEX);
-
-  return { ...ev, id, sig };
+  // イベントID(ハッシュ値)計算・署名
+  return finishEvent(ev, BOT_PRIVATE_KEY_HEX);
 };
 
 // リレーにイベントを送信
@@ -47,15 +46,17 @@ const main = async (targetWord) => {
   });
 
   await relay.connect();
-  console.log("connected to relay");
 
-  const sub = /* Q-2: すべてのテキスト投稿を購読しよう */
+  /* Q-2: すべてのテキスト投稿を購読しよう */
+  const sub = ???;
   sub.on("event", (ev) => {
     /* Q-3: 「受信した投稿のcontentに対象の単語が含まれていたら、
             その投稿イベントにリアクションする」ロジックを完成させよう */
+    // ヒント: ある文字列に指定の単語が含まれているかを判定するには、includes()メソッドを使うとよいでしょう
+    ???;
   });
 };
 
 // コマンドライン引数をリアクション対象の単語とする
-const targetWord = getCliArg("specify target word to react!");
+const targetWord = getCliArg("error: リアクション対象の単語をコマンドライン引数として設定してください");
 main(targetWord).catch((e) => console.error(e));
