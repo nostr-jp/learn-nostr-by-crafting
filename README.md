@@ -47,7 +47,7 @@ npm install
   - Iris: 投稿者のアイコンをクリック → 右上の … → 「Copy User ID」
   - Rabbit: 投稿者のアイコンをクリック → 表示されるプロフィール画面で`npub`から始まる文字列を確認
   - nostter: 投稿者のアイコンをクリック → 表示されるプロフィール画面で`npub`または`nprofile`から始まる文字列を確認
-- 1-4節: リプライの実装が正しいか確認してくれる [リプライ実装チェッカーbot](https://nostx.shino3.net.npub1y75tnycxnpp8z23fkql4xn597x3alnd728xa93ujxtxvxrktvm5qf3rg9u/) を用意しています。公開鍵は以下の通り
+- 1-4節: リプライの実装が正しいか確認してくれる [リプライ実装チェッカーbot](https://nostx.shino3.net/npub1y75tnycxnpp8z23fkql4xn597x3alnd728xa93ujxtxvxrktvm5qf3rg9u/) を用意しています。公開鍵は以下の通り
 
   ```
   27a8b993069842712a29b03f534e85f1a3dfcdbe51cdd2c79232ccc30ecb66e8
