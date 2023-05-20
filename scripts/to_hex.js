@@ -1,25 +1,31 @@
-const {nip19} = require('nostr-tools');
+const { nip19 } = require("nostr-tools");
 
 if (process.argv.length <= 2) {
-  console.error("specify bach32 encoded ids (npub1..., nsec1..., note1..., nevent1...)");
+  console.error(
+    "usage: npm run to-hex <bech32 ID (npub, nprofile, nsec, note, nevent)>"
+  );
   process.exit(1);
 }
 
-const {type, data} = nip19.decode(process.argv[2])
+const { type, data } = nip19.decode(process.argv[2]);
 
 const out = (() => {
   switch (type) {
     case "npub":
-      return `public key: ${data}`;
+      return `公開鍵: ${data}`;
+    case "nprofile":
+      return `公開鍵: ${data.pubkey}`;
     case "nsec":
-      return `!!! HANDLE WITH CARE !!! private key: ${data}`;
+      return `!!! 取り扱い注意 !!! 秘密鍵: ${data}`;
     case "note":
-      return `event id: ${data}`;
+      return `イベントID: ${data}`;
     case "nevent":
-      return `event id: ${data.id}, author's pubkey: ${data.author ?? "(not found)"}`
+      return `イベントID: ${data.id}, イベント発行者の公開鍵: ${
+        data.author ?? "(不明)"
+      }`;
     default:
-      return `type ${type} is not supported!`
-  } 
-})()
+      return `${type}: この種類のIDには対応していません! `;
+  }
+})();
 
-console.log(out)
+console.log(out);
