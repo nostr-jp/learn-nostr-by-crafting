@@ -8,8 +8,10 @@ const main = () => {
   const ws = new WebSocket(relayUrl);
 
   ws.onopen = () => {
+    /* Q-1: REQメッセージを書いてみよう */
     const req = [
-      /* Q-1: REQメッセージを書いてみよう */
+      ???, 
+      "subscription", // 購読ID。空でない・長すぎない文字列であれば何でもOK
       ???
     ];
     ws.send(JSON.stringify(req));
