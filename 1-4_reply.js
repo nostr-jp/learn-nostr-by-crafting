@@ -3,7 +3,7 @@ const {
   relayInit,
   getPublicKey,
   getEventHash,
-  signEvent,
+  getSignature,
   nip19
 } = require("nostr-tools");
 require("websocket-polyfill");
@@ -37,7 +37,7 @@ const composeReplyPost = (content, targetPubkey, targetEventId) => {
     created_at: currUnixtime(),
   };
   const id = getEventHash(ev);
-  const sig = signEvent(ev, PRIVATE_KEY_HEX);
+  const sig = getSignature(ev, PRIVATE_KEY_HEX);
 
   return { ...ev, id, sig };
 };
