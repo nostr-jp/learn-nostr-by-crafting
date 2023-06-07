@@ -68,10 +68,14 @@ const main = async () => {
   const sub = ???;
 
   sub.on("event", (ev) => {
-    // リプライしても安全なら、リプライイベントを組み立てて送信する
-    if (isSafeToReply(ev.pubkey)) {
-      const replyPost = composeReplyPost("こんにちは！", ev);
-      publishToRelay(relay, replyPost);
+    try {
+      // リプライしても安全なら、リプライイベントを組み立てて送信する
+      if (isSafeToReply(ev.pubkey)) {
+        const replyPost = composeReplyPost("こんにちは！", ev);
+        publishToRelay(relay, replyPost);
+      }
+    } catch (err) {
+      console.error(err);
     }
   });
 };
