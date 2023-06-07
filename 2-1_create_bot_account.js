@@ -9,13 +9,11 @@ require("websocket-polyfill");
 
 /* Q-1: Bot用に新しい秘密鍵を生成して、ここに設定しよう */
 const BOT_PRIVATE_KEY_HEX = ???;
-const BOT_PUBLIC_KEY_HEX = getPublicKey(BOT_PRIVATE_KEY_HEX);
 
 const relayUrl = "wss://relay-jp.nostr.wirednet.jp";
 
 /**
  * メタデータ(プロフィール)イベントを組み立てる
- * @param {string} content
  */
 const composeMetadata = () => {
   /* Q-2: Botアカウントのプロフィールを設定しよう  */
