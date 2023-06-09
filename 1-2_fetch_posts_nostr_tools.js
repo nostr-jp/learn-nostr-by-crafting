@@ -6,7 +6,7 @@ const relayUrl = "wss://relay-jp.nostr.wirednet.jp";
 
 const main = async () => {
   /* Q-1: nostr-toolsのRelayオブジェクトを初期化してみよう */
-  const relay = ???;
+  const relay = 私はノストラ派;
   relay.on("error", () => {
     console.error("failed to connect");
   });
