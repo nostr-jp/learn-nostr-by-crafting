@@ -12,7 +12,7 @@
     "sub-reply": "node scripts/sub_reply.js"
   },
   "dependencies": {
-    "nostr-tools": "^1.11.1",
+    "nostr-tools": "1.13.1",
     "websocket-polyfill": "^0.0.3"
   }
 }
