@@ -1,10 +1,11 @@
-const { currUnixtime, getCliArg } = require("./utils.js");
-const {
+import { currUnixtime, getCliArg } from "./utils.js";
+
+import {
   relayInit,
   getPublicKey,
   finishEvent
-} = require("nostr-tools");
-require("websocket-polyfill");
+} from "nostr-tools";
+import "websocket-polyfill";
 
 /* Bot用の秘密鍵をここに設定 */
 const BOT_PRIVATE_KEY_HEX = ???;

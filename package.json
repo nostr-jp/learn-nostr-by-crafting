@@ -1,6 +1,7 @@
 {
   "name": "learn-nostr-by-crafting",
   "version": "0.1.0",
+  "type": "module",
   "main": "index.js",
   "repository": "ssh://git@github.com/jiftechnify/learn-nostr-by-crafting.git",
   "author": "jiftechnify",
