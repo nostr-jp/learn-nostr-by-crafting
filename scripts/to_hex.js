@@ -1,4 +1,4 @@
-const { nip19 } = require("nostr-tools");
+import { nip19 } from "nostr-tools";
 
 if (process.argv.length <= 2) {
   console.error(

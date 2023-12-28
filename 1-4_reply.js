@@ -1,12 +1,13 @@
-const { currUnixtime, getCliArg } = require("./utils.js");
-const {
+import { currUnixtime, getCliArg } from "./utils.js";
+
+import {
   relayInit,
   getPublicKey,
   getEventHash,
   getSignature,
   nip19
-} = require("nostr-tools");
-require("websocket-polyfill");
+} from "nostr-tools";
+import "websocket-polyfill";
 
 /* 自分の秘密鍵をhex形式に変換して、ここに設定*/
 const PRIVATE_KEY_HEX = ???;
