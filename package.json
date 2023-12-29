@@ -5,7 +5,7 @@
   "main": "index.js",
   "repository": "ssh://git@github.com/jiftechnify/learn-nostr-by-crafting.git",
   "author": "jiftechnify",
-  "license": "MIT",
+  "license": "Unlicense",
   "private": true,
   "scripts": {
     "to-hex": "node scripts/to_hex.js",
